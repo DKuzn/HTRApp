@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 #include "image.h"
 #include "neuralnetwork.h"
-#include <opencv2/opencv.hpp>
 #include <Eigen/Eigen>
 
 MainWindow::MainWindow(QMainWindow *parent)
@@ -44,8 +43,8 @@ void MainWindow::on_clearButton_clicked()
 
 void MainWindow::on_recButton_clicked()
 {
-    std::vector<uint> topology = {784, 120, 10};
-    neuralnetwork net = neuralnetwork(topology);
+    std::vector<unsigned int> topology = {784, 120, 10};
+    NeuralNetwork net = NeuralNetwork(topology);
     QImage img = ui->drawArea->grab(ui->drawArea->sceneRect().toRect()).toImage(); // вылетает
     Image image = Image();
     image.open(img);
