@@ -17,6 +17,7 @@ find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
 include_directories("eigen")
+include_directories("include/HTRApp")
 
 add_executable(HTRApp
     src/main.cpp
@@ -25,10 +26,19 @@ add_executable(HTRApp
     include/HTRApp/mainwindow.ui
     include/HTRApp/paintscene.cpp
     include/HTRApp/paintscene.h
-        include/HTRApp/neuralnetwork.cpp
-        include/HTRApp/neuralnetwork.h
+    include/HTRApp/neuralnetwork.cpp
+    include/HTRApp/neuralnetwork.h
     include/HTRApp/image.cpp
     include/HTRApp/image.h
+)
+add_executable(train_net
+    src/train.cpp
+    include/HTRApp/dataset.cpp
+    include/HTRApp/dataset.h
+    include/HTRApp/datasetitem.cpp
+    include/HTRApp/datasetitem.h
+    include/HTRApp/neuralnetwork.cpp
+    include/HTRApp/neuralnetwork.h
 )
 
 target_link_libraries(HTRApp Qt5::Widgets)

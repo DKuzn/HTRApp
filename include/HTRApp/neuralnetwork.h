@@ -48,7 +48,7 @@ public:
     std::vector<RowVector*> cacheLayers; // stores the unactivated (activation fn not yet applied) values of layers
     std::vector<RowVector*> deltas; // stores the error contribution of each neurons
     std::vector<Matrix*> weights; // the connection weights itself
-    std::vector<uint> topology;
+    std::vector<unsigned int> topology;
     Scalar learningRate;
 };
 
