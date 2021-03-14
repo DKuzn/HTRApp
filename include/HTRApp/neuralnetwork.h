@@ -10,10 +10,10 @@ typedef Eigen::RowVectorXf RowVector;
 typedef Eigen::VectorXf ColVector;
 
 
-class neuralnetwork {
+class NeuralNetwork {
 public:
     // constructor
-    neuralnetwork(std::vector<uint> topology, Scalar learningRate = Scalar(0.005));
+    explicit NeuralNetwork(std::vector<unsigned int> topology, Scalar learningRate = Scalar(0.005));
 
     // function for forward propagation of data
     void propagateForward(RowVector& input);
@@ -34,6 +34,8 @@ public:
     void train(std::vector<RowVector> input_data, std::vector<RowVector> output_data);
 
     RowVector forward(RowVector& x);
+    void saveWeights(const std::string& path);
+    void loadWeights(const std::string& path);
 
     // storage objects for working of neural network
     /*
