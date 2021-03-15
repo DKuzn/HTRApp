@@ -37,7 +37,7 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 
 void MainWindow::on_clearButton_clicked()
 {
-    ui->drawArea->scene()->clear();
+    ui->drawArea->scene()->clear(); // вылетает
     ui->result->clear();
 }
 
@@ -45,6 +45,8 @@ void MainWindow::on_recButton_clicked()
 {
     std::vector<unsigned int> topology = {784, 120, 10};
     NeuralNetwork net = NeuralNetwork(topology);
+    std::string path = "../HTRApp/net_weights.csv";
+    net.loadWeights(path);
     QImage img = ui->drawArea->grab(ui->drawArea->sceneRect().toRect()).toImage(); // вылетает
     Image image = Image();
     image.open(img);
