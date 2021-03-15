@@ -10,11 +10,13 @@ class Dataset {
 public:
     explicit Dataset(std::string& path);
     DatasetItem operator[](int index);
-    std::vector<DatasetItem> data;
+    std::vector<RowVector> x_vector;
+    std::vector<RowVector> y_vector;
 
 private:
     static std::vector<DatasetItem> loadCsv(std::string& path);
     static RowVector toOneHot(Scalar y);
+    std::vector<DatasetItem> data;
 };
 
 

@@ -5,9 +5,14 @@
 
 Dataset::Dataset(std::string &path) {
     data = loadCsv(path);
+    for (const DatasetItem& i : data) {
+        x_vector.push_back(i.x);
+        y_vector.push_back(i.y);
+    }
 }
 
 std::vector<DatasetItem> Dataset::loadCsv(std::string &path) {
+    std::setlocale(LC_NUMERIC, "en_US.UTF-8");
     std::ifstream file(path);
     std::string line;
 
