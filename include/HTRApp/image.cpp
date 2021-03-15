@@ -31,11 +31,15 @@ cv::Mat Image::to_mat(QImage img) {
         cntrs.insert(cntrs.end(), cntr[i].begin(), cntr[i].end());
     }
     std::vector<cv::Point> appr;
-    cv::approxPolyDP(cntrs, appr, 3, true);
-    cv::Rect bbox = cv::boundingRect(appr);
-    bbox = to_square(bbox);
-    cv::Mat crop(bin, bbox);
-    return crop;
+    if (!appr.empty()) {
+        cv::approxPolyDP(cntrs, appr, 3, true);
+        cv::Rect bbox = cv::boundingRect(appr);
+        bbox = to_square(bbox);
+        cv::Mat crop(bin, bbox);
+        return crop;
+    } else {
+        return bin;
+    }
 }
 
 cv::Rect Image::to_square(cv::Rect bbox) {
