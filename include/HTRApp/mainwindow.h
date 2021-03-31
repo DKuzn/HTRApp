@@ -6,6 +6,7 @@
 #include <QResizeEvent>
 
 #include "paintscene.h"
+#include "neuralnetwork.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,9 +25,10 @@ private:
     QTimer *timer;
 
     PaintScene *scene;
+    NeuralNetwork *net;
 
 private:
-    void resizeEvent(QResizeEvent * event);
+    void resizeEvent(QResizeEvent * event) override;
 
 private slots:
     void slotTimer();

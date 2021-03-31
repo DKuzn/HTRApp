@@ -16,6 +16,11 @@ MainWindow::MainWindow(QMainWindow *parent)
     timer = new QTimer();
     connect(timer, &QTimer::timeout, this, &MainWindow::slotTimer);
     timer->start(100);
+
+    std::vector<unsigned int> topology = {784, 120, 10};
+    this->net = new NeuralNetwork(topology);
+    std::string weights_path = "./net_weights.csv";
+    this->net->loadWeights(weights_path);
 }
 
 MainWindow::~MainWindow()
@@ -37,21 +42,17 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 
 void MainWindow::on_clearButton_clicked()
 {
-    ui->drawArea->scene()->clear(); // вылетает
+    ui->drawArea->scene()->clear();
     ui->result->clear();
 }
 
 void MainWindow::on_recButton_clicked()
 {
-    std::vector<unsigned int> topology = {784, 120, 10};
-    NeuralNetwork net = NeuralNetwork(topology);
-    std::string path = "../HTRApp/net_weights.csv";
-    net.loadWeights(path);
-    QImage img = ui->drawArea->grab(ui->drawArea->sceneRect().toRect()).toImage(); // вылетает
+    QImage img = ui->drawArea->grab(ui->drawArea->sceneRect().toRect()).toImage();
     Image image = Image();
     image.open(img);
     RowVector input = image.getVector();
-    RowVector pred = net.forward(input);
+    RowVector pred = net->forward(input);
     RowVector::Index idx;
     pred.maxCoeff(&idx);
     std::string res = std::to_string(idx);

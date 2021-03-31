@@ -31,7 +31,7 @@ cv::Mat Image::to_mat(QImage img) {
         cntrs.insert(cntrs.end(), cntr[i].begin(), cntr[i].end());
     }
     std::vector<cv::Point> appr;
-    if (!appr.empty()) {
+    if (!cntrs.empty()) {
         cv::approxPolyDP(cntrs, appr, 3, true);
         cv::Rect bbox = cv::boundingRect(appr);
         bbox = to_square(bbox);
