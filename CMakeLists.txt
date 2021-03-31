@@ -12,11 +12,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
-set(OpenCV_DIR "/home/DKuzn/QtProjects/HTRApp/build")
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-include_directories("eigen")
+find_package (Eigen3 3.3 REQUIRED NO_MODULE)
+
 include_directories("include/HTRApp")
 
 add_executable(HTRApp
@@ -43,5 +43,6 @@ add_executable(train_net
 
 target_link_libraries(HTRApp Qt5::Widgets)
 target_link_libraries(HTRApp ${OpenCV_LIBS})
+target_link_libraries (HTRApp Eigen3::Eigen)
 
 set_property(TARGET HTRApp PROPERTY CXX_STANDARD 11)
