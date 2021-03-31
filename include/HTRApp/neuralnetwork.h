@@ -1,6 +1,6 @@
 #ifndef HTRAPP_NEURALNETWORK_H
 #define HTRAPP_NEURALNETWORK_H
-#include <Eigen/Eigen>
+#include <eigen3/Eigen/Eigen>
 #include <iostream>
 #include <vector>
 

@@ -1,4 +1,4 @@
-#include "../include/HTRApp/mainwindow.h"
+#include "mainwindow.h"
 
 #include <QApplication>
 
