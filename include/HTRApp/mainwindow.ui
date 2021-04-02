@@ -10,8 +10,13 @@
     <height>500</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>12</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Распознать цифру</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QGraphicsView" name="drawArea">
@@ -28,30 +33,63 @@
     <property name="geometry">
      <rect>
       <x>460</x>
-      <y>273</y>
-      <width>121</width>
-      <height>181</height>
+      <y>290</y>
+      <width>131</width>
+      <height>131</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="buttons">
      <item>
+      <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Результат</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QLabel" name="result">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="recButton">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
        <property name="text">
-        <string>Recognite</string>
+        <string>Распознать</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="clearButton">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
        <property name="text">
-        <string>Clear</string>
+        <string>Очистить</string>
        </property>
       </widget>
      </item>
