@@ -2,7 +2,7 @@
 #define HTRAPP_DATASET_H
 #include <string>
 #include <vector>
-#include <eigen3/Eigen/Eigen>
+#include <Eigen/Eigen>
 #include "datasetitem.h"
 
 

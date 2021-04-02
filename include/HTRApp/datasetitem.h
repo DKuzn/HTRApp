@@ -1,6 +1,6 @@
 #ifndef HTRAPP_DATASETITEM_H
 #define HTRAPP_DATASETITEM_H
-#include <eigen3/Eigen/Eigen>
+#include <Eigen/Eigen>
 
 
 typedef float Scalar;

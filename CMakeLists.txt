@@ -15,11 +15,12 @@ find_package(Qt5 COMPONENTS Widgets REQUIRED)
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-find_package (Eigen3 3.3 REQUIRED NO_MODULE)
+find_package(Eigen3 3.3 REQUIRED NO_MODULE)
+include_directories(${EIGEN3_INCLUDE_DIR})
 
 include_directories("include/HTRApp")
 
-add_executable(HTRApp
+add_executable(HTRApp WIN32
     src/main.cpp
     include/HTRApp/mainwindow.cpp
     include/HTRApp/mainwindow.h
@@ -43,6 +44,6 @@ add_executable(train_net
 
 target_link_libraries(HTRApp Qt5::Widgets)
 target_link_libraries(HTRApp ${OpenCV_LIBS})
-target_link_libraries (HTRApp Eigen3::Eigen)
+target_link_libraries(HTRApp Eigen3::Eigen)
 
 set_property(TARGET HTRApp PROPERTY CXX_STANDARD 11)
