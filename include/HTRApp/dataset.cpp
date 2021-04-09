@@ -5,7 +5,7 @@
 
 Dataset::Dataset(std::string &path) {
     data = loadCsv(path);
-    for (const DatasetItem& i : data) {
+    for (const DatasetItem &i : data) {
         x_vector.push_back(i.x);
         y_vector.push_back(i.y);
     }

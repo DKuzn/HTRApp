@@ -5,9 +5,7 @@
 #include <Eigen/Eigen>
 
 MainWindow::MainWindow(QMainWindow *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
+        : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
     scene = new PaintScene();
@@ -23,31 +21,26 @@ MainWindow::MainWindow(QMainWindow *parent)
     this->net->loadWeights(weights_path);
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     delete ui;
 }
 
-void MainWindow::slotTimer()
-{
+void MainWindow::slotTimer() {
     timer->stop();
-    scene->setSceneRect(0,0, ui->drawArea->width() - 20, ui->drawArea->height() - 20);
+    scene->setSceneRect(0, 0, ui->drawArea->width() - 20, ui->drawArea->height() - 20);
 }
 
-void MainWindow::resizeEvent(QResizeEvent *event)
-{
+void MainWindow::resizeEvent(QResizeEvent *event) {
     timer->start(100);
     QMainWindow::resizeEvent(event);
 }
 
-void MainWindow::on_clearButton_clicked()
-{
+void MainWindow::on_clearButton_clicked() {
     ui->drawArea->scene()->clear();
     ui->result->clear();
 }
 
-void MainWindow::on_recButton_clicked()
-{
+void MainWindow::on_recButton_clicked() {
     QImage img = ui->drawArea->grab(ui->drawArea->sceneRect().toRect()).toImage();
     Image image = Image();
     image.open(img);

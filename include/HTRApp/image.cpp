@@ -3,8 +3,7 @@
 #include <QImage>
 #include <utility>
 
-Image::Image()
-{
+Image::Image() {
     vector.setZero(784);
 }
 
@@ -39,7 +38,7 @@ cv::Mat Image::to_mat(QImage img) {
             cv::Mat crop(bin, bbox);
             return crop;
         }
-        catch (const cv::Exception& e) {
+        catch (const cv::Exception &e) {
             std::vector<int> paddings = calcPadding(bin, bbox);
             if (bbox.x < 0) {
                 bbox.x = 0;
@@ -66,8 +65,7 @@ cv::Rect Image::to_square(cv::Rect bbox) {
         int s = (w - h) / 2;
         y = y - s;
         h = w;
-    }
-    else if (h > w) {
+    } else if (h > w) {
         int s = (h - w) / 2;
         x = x - s;
         w = h;
@@ -79,7 +77,7 @@ cv::Rect Image::to_square(cv::Rect bbox) {
     return bbox;
 }
 
-std::vector<int> Image::calcPadding(const cv::Mat& img, const cv::Rect& bbox) {
+std::vector<int> Image::calcPadding(const cv::Mat &img, const cv::Rect &bbox) {
     int x, y, w, h, imgW, imgH, top, bottom, left, right;
     x = bbox.x;
     y = bbox.y;

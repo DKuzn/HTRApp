@@ -7,20 +7,20 @@
 #include <QDebug>
 
 
-class PaintScene : public QGraphicsScene
-{
-    Q_OBJECT
+class PaintScene : public QGraphicsScene {
+Q_OBJECT
 
 public:
-    explicit PaintScene(QObject *parent = 0);
-    ~PaintScene();
+    explicit PaintScene(QObject *parent = nullptr);
+
+    ~PaintScene() override;
 
 private:
-    QPointF previousPoint;      // Координаты предыдущей точки
+    QPointF previousPoint;
 
 private:
-    // Для рисования используем события мыши
-    void mousePressEvent(QGraphicsSceneMouseEvent * event) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
 
 };

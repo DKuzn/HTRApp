@@ -1,5 +1,6 @@
 #ifndef HTRAPP_DATASETITEM_H
 #define HTRAPP_DATASETITEM_H
+
 #include <Eigen/Eigen>
 
 
@@ -10,6 +11,7 @@ typedef Eigen::RowVectorXf RowVector;
 class DatasetItem {
 public:
     DatasetItem(RowVector x_i, RowVector y_i);
+
     RowVector x;
     RowVector y;
 };
