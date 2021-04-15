@@ -1,3 +1,20 @@
+// image.cpp
+//
+// Copyright 2021 Дмитрий Кузнецов
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 #include "image.h"
 #include <opencv2/opencv.hpp>
 #include <QImage>
@@ -8,7 +25,7 @@ Image::Image() {
 }
 
 void Image::open(QImage img) {
-    cv::Mat mat = to_mat(std::move(img));
+    cv::Mat mat = toMat(std::move(img));
     cv::resize(mat, mat, cv::Size(28, 28));
     for (int i = 0; i < 28; i++) {
         for (int j = 0; j < 28; j++) {
@@ -17,7 +34,7 @@ void Image::open(QImage img) {
     }
 }
 
-cv::Mat Image::to_mat(QImage img) {
+cv::Mat Image::toMat(QImage img) {
     cv::Mat mat(img.height(), img.width(), CV_8UC4, img.bits(), img.bytesPerLine());
     cv::cvtColor(mat, mat, cv::COLOR_BGRA2GRAY);
     cv::Mat bin;
@@ -33,7 +50,7 @@ cv::Mat Image::to_mat(QImage img) {
     if (!cntrs.empty()) {
         cv::approxPolyDP(cntrs, appr, 3, true);
         cv::Rect bbox = cv::boundingRect(appr);
-        bbox = to_square(bbox);
+        bbox = toSquare(bbox);
         try {
             cv::Mat crop(bin, bbox);
             return crop;
@@ -55,7 +72,7 @@ cv::Mat Image::to_mat(QImage img) {
     }
 }
 
-cv::Rect Image::to_square(cv::Rect bbox) {
+cv::Rect Image::toSquare(cv::Rect bbox) {
     int x, y, w, h;
     x = bbox.x;
     y = bbox.y;
