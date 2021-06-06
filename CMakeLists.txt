@@ -18,6 +18,8 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
+find_package(Catch2 REQUIRED)
+
 include_directories("include/HTRApp")
 
 add_executable(HTRApp WIN32
@@ -42,8 +44,23 @@ add_executable(train_net
     include/HTRApp/neuralnetwork.h
 )
 
+add_executable(tests
+        tests/tests.cpp
+        include/HTRApp/dataset.cpp
+        include/HTRApp/dataset.h
+        include/HTRApp/datasetitem.cpp
+        include/HTRApp/datasetitem.h
+        include/HTRApp/neuralnetwork.cpp
+        include/HTRApp/neuralnetwork.h
+        include/HTRApp/image.cpp
+        include/HTRApp/image.h)
+
 target_link_libraries(HTRApp Qt5::Widgets)
 target_link_libraries(HTRApp ${OpenCV_LIBS})
 target_link_libraries(HTRApp Eigen3::Eigen)
+target_link_libraries(tests Qt5::Widgets)
+target_link_libraries(tests ${OpenCV_LIBS})
+target_link_libraries(tests Eigen3::Eigen)
+target_link_libraries(tests Catch2::Catch2)
 
 set_property(TARGET HTRApp PROPERTY CXX_STANDARD 11)
