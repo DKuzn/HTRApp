@@ -32,6 +32,17 @@ class NeuralNetwork {
 public:
     explicit NeuralNetwork(std::vector<unsigned int> topology, Scalar learningRate = Scalar(0.005));
 
+    void train(std::vector<RowVector> input_data, std::vector<RowVector> output_data);
+
+    RowVector forward(RowVector &x);
+
+    void saveWeights(const std::string &path);
+
+    void loadWeights(const std::string &path);
+
+    std::vector<Matrix *> getWeights();
+
+private:
     void propagateForward(RowVector &input);
 
     void propagateBackward(RowVector &output);
@@ -43,14 +54,6 @@ public:
     static Scalar activationFunction(Scalar x);
 
     static Scalar activationFunctionDerivative(Scalar x);
-
-    void train(std::vector<RowVector> input_data, std::vector<RowVector> output_data);
-
-    RowVector forward(RowVector &x);
-
-    void saveWeights(const std::string &path);
-
-    void loadWeights(const std::string &path);
 
     std::vector<RowVector *> neuronLayers;
     std::vector<RowVector *> cacheLayers;

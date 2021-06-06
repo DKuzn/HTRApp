@@ -117,9 +117,14 @@ void NeuralNetwork::train(std::vector<RowVector> input_data, std::vector<RowVect
 }
 
 RowVector NeuralNetwork::forward(RowVector &x) {
-    propagateForward(x);
-    RowVector out = *neuronLayers.back();
-    return out;
+    if (x.size() == this->topology[0]) {
+        propagateForward(x);
+        RowVector out = *neuronLayers.back();
+        return out;
+    } else {
+        throw std::runtime_error("Sizes are not equaled: " + std::to_string(x.size()) + " and "
+        + std::to_string(this->topology[0]));
+    }
 }
 
 void NeuralNetwork::saveWeights(const std::string &path) {
@@ -139,37 +144,45 @@ void NeuralNetwork::saveWeights(const std::string &path) {
 void NeuralNetwork::loadWeights(const std::string &path) {
     std::setlocale(LC_NUMERIC, "en_US.UTF-8");
     std::ifstream file(path);
-    std::string line;
-    int length = weights.size();
-    int matrix = 0;
+    if (file.is_open()) {
+        std::string line;
+        unsigned int length = weights.size();
+        int matrix = 0;
 
-    while (matrix < length) {
+        while (matrix < length) {
 
-        int row = 0;
-        int col;
+            int row = 0;
+            int col;
 
-        if (file.is_open()) {
-            while (std::getline(file, line)) {
-                char *ptr = (char *) line.c_str();
-                int len = line.length();
-                if (len == 0) {
-                    matrix++;
-                    row = 0;
-                    continue;
-                }
-
-                col = 0;
-
-                char *start = ptr;
-                for (int i = 0; i < len; i++) {
-                    if (ptr[i] == ',') {
-                        weights[matrix]->coeffRef(row, col++) = std::atof(start);
-                        start = ptr + i + 1;
+            if (file.is_open()) {
+                while (std::getline(file, line)) {
+                    char *ptr = (char *) line.c_str();
+                    int len = line.length();
+                    if (len == 0) {
+                        matrix++;
+                        row = 0;
+                        continue;
                     }
+
+                    col = 0;
+
+                    char *start = ptr;
+                    for (int i = 0; i < len; i++) {
+                        if (ptr[i] == ',') {
+                            weights[matrix]->coeffRef(row, col++) = std::atof(start);
+                            start = ptr + i + 1;
+                        }
+                    }
+                    weights[matrix]->coeffRef(row, col) = std::atof(start);
+                    row++;
                 }
-                weights[matrix]->coeffRef(row, col) = std::atof(start);
-                row++;
             }
         }
+    } else {
+        throw std::runtime_error("File not found: " + path);
     }
+}
+
+std::vector<Matrix *> NeuralNetwork::getWeights() {
+    return this->weights;
 }
